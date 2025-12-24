@@ -1,0 +1,31 @@
+.tictactoe-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tictactoe-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.tictactoe-container {
+  width: 605px;
+  height: 605px;
+  border: 1px solid gray;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tictactoe-block {
+  width: 200px;
+  height: 200px;
+  display: inline-flex;
+  border: 1px solid blanchedalmond;
+  background-color: aliceblue;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}

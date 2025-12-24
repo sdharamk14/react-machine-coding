@@ -1,0 +1,19 @@
+.container {
+  height: 250px;
+  width: 250px;
+  border: 1px solid black;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.row button {
+  height: 60px;
+  width: 60px;
+  border: 1px solid black;
+  border-radius: none;
+}

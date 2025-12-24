@@ -1,0 +1,49 @@
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.carousel-container,
+.box {
+  width: 70vw;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.box {
+  margin: 0px 40px;
+  position: relative;
+}
+
+.box img[data-active="true"] {
+  opacity: 1;
+}
+
+.box img[data-active="false"] {
+  opacity: 0;
+}
+
+.box img {
+  position: absolute;
+  width: 100%;
+  height: 60vh;
+  opacity: 0;
+  transition: opacity 0.4s linear;
+}
+
+.carousel-container button {
+  background-color: bisque;
+}
+
+.carousel-stepper div {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.carousel-stepper div button {
+  border-radius: 50%;
+  border: 2px solid burlywood;
+}

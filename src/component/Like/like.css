@@ -1,0 +1,21 @@
+.button {
+  border-radius: 20px;
+  border: 1px solid #888;
+}
+
+.button[data-state="like"]:hover {
+  background-color: #f00;
+}
+
+.button[data-state="unlike"]:hover {
+  background-color: #888;
+}
+
+.like {
+  background-color: #f00;
+  /* border: 1px solid #f00; */
+}
+
+.unlike {
+  background-color: #888;
+}

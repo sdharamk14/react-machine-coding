@@ -1,0 +1,29 @@
+.progress-bar {
+  width: 100%;
+  background-color: slategray;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+}
+
+.progress-value {
+  top: 0;
+  width: 10%;
+  background-color: green;
+  height: 100%;
+  transition: width 0.2 ease-in 1s;
+  position: absolute;
+}
+
+.progress-bar-value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  z-index: 2;
+}

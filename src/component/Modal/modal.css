@@ -1,0 +1,45 @@
+.dialog {
+  position: fixed;
+  /* top: 0;
+  left: 0; */
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+.dialog-content {
+  background-color: #ffffff;
+  color: #000000;
+  height: 60vh;
+  width: 60vw;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.dialog-title {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog-body {
+  display: flex;
+  flex: 1;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+

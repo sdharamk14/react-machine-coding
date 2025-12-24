@@ -1,0 +1,10 @@
+.side-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  padding: 15px 10px;
+  border-bottom: 2px solid blanchedalmond;
+  color: coral;
+}

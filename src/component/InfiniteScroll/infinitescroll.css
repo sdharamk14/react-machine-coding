@@ -1,0 +1,11 @@
+.infinite-scroll-container {
+  height: 400px;
+  width: 250px;
+  overflow-y: scroll;
+  background-color: antiquewhite;
+}
+
+.infinite-scroll-row {
+  padding: 5px;
+  border-bottom: 1px solid brown;
+}
