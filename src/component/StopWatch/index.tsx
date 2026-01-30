@@ -9,7 +9,7 @@ const StopWatch = () => {
   useEffect(() => {
     if (isRunning) {
       if (!startTimeRef.current) {
-        startTimeRef.current = new Date().getTime();
+        startTimeRef.current = new Date().getTime(); // setting the start time
       }
       intervalIdRef.current = setInterval(() => {
         setTime(new Date().getTime() - startTimeRef.current);

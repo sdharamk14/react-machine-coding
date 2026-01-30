@@ -2,6 +2,7 @@ import Accordian from "../component/Accordian";
 import { AutocompleteDemo } from "../component/Autocomplete";
 import { CarouselDemo } from "../component/Carausal";
 import CheckboxItem from "../component/CheckboxItem";
+import CountryCapitalGame from "../component/CountryCapitalGame";
 import CustomGrid from "../component/CustomGrid";
 import { DataTable } from "../component/DataTable";
 import Dropdown from "../component/Dropdown";
@@ -16,6 +17,7 @@ import { PaginationDemo } from "../component/Pagination";
 import Progress from "../component/Progress";
 import StarRating from "../component/StarRating";
 import StopWatch from "../component/StopWatch";
+import SwitchCase from "../component/SwitchCase";
 import Tabs from "../component/Tabs";
 import TicTacToe from "../component/TicTacToe";
 import Todo from "../component/Todo";
@@ -172,5 +174,32 @@ export const routes = [
     name: "File Explorer",
     path: "/file-explorer",
     element: <FileExplorer />,
+  },
+  {
+    key: "country-capital-game",
+    name: "Country Capital Game",
+    path: "/country-capital-game",
+    element: <CountryCapitalGame />,
+  },
+  {
+    key: "switch-case",
+    name: "Switch Case",
+    path: "/switch-case",
+    element: (
+      <SwitchCase value={10}>
+        <SwitchCase.CustomCase value={1}>
+          <div>Case 1</div>
+        </SwitchCase.CustomCase>
+        <SwitchCase.CustomCase value={2}>
+          <div>Case 2</div>
+        </SwitchCase.CustomCase>
+        <SwitchCase.CustomCase value={(value: any) => value < 2}>
+          <div>Case 3</div>
+        </SwitchCase.CustomCase>
+        <SwitchCase.DefaultCase>
+          <div>Default Case</div>
+        </SwitchCase.DefaultCase>
+      </SwitchCase>
+    ),
   },
 ];

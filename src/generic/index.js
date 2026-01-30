@@ -274,8 +274,8 @@ Function.prototype.myApply = function (thisArg, args = []) {
 };
 
 Function.prototype.myBind = function (thisArg, ...args) {
-  const context = thisArg || globalThis;
-  const self = this;
+  const context = thisArg || globalThis; // object that will be used as the context for the function call
+  const self = this; // this represents the function that is being bound
 
   return function (...args2) {
     const isNew = this instanceof boundFunction;
@@ -426,12 +426,11 @@ function appendAndLastItem(items) {
   return lastItem ? ` and ${lastItem}` : "";
 }
 
-
 /**
  * example - const object = { "a.b.0": 1, "a.b.1": 2, "a.b.2": 3, "a.c.0": "foo" };
- * @param {*} obj 
- * @param {*} prevKey 
- * @returns 
+ * @param {*} obj
+ * @param {*} prevKey
+ * @returns
  */
 function squashObject(obj, prevKey = "") {
   let result = {};
@@ -457,3 +456,249 @@ function squashObject(obj, prevKey = "") {
   }
   return result;
 }
+
+/**
+Example code to run and check
+const items = [1, 3, 4, 5, 4];
+for (const pageData of pageGenerator(items, 2)) {
+  console.log(pageData);
+}
+ * @param {*} items 
+ * @param {*} pageSize 
+ */
+function* pageGenerator(items, pageSize) {
+  for (let i = 0; i < items.length; i += pageSize) {
+    yield items.slice(i, i + pageSize);
+  }
+}
+
+/**
+ * you would get flat listed comments with replies property
+ * you need to convert them into nested comments array
+ * @param {*} posts
+ * @returns
+ */
+function NestedComments(posts) {
+  const result = [];
+
+  for (const post of posts) {
+    if (!post.replyTo) {
+      result.push(post);
+    } else {
+      const parent = result.find((item) => item.id === post.replyTo);
+      if (parent) {
+        parent.replies = parent.replies || [];
+        parent.replies.push(post);
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ *
+ * @param {*} val
+ * @param {*} keys
+ * @returns
+ */
+function deepOmit(val, keys) {
+  if (typeof val !== "object" || val === null) {
+    return val;
+  }
+
+  if (Array.isArray(val)) {
+    return val.map((item) => {
+      return deepOmit(item, keys);
+    });
+  }
+
+  const objectKeys = Object.keys(val);
+  const result = {};
+  for (const key of objectKeys) {
+    if (!keys.includes(key)) {
+      if (typeof val[key] === "object" && !Array.isArray(val[key])) {
+        result[key] = deepOmit(val[key], keys);
+      } else {
+        result[key] = val[key];
+      }
+    }
+  }
+  return result;
+}
+
+/**
+ *const tree = {
+  tag: 'body',
+  children: [
+    { tag: 'div', children: [{ tag: 'span', children: ['foo', 'bar'] }] },
+    { tag: 'div', children: ['baz'] },
+  ],
+};
+ * @param {} element
+ * @param {*} count
+ * @returns
+ */
+function serializeHTML(element, count = 0) {
+  const indent = "\t".repeat(count); // 2 spaces per indent
+
+  // Handle arrays of elements
+  if (Array.isArray(element)) {
+    return element
+      .map((item) =>
+        typeof item === "string"
+          ? `${indent}${item}`
+          : serializeHTML(item, count)
+      )
+      .join("\n");
+  }
+
+  const { tag, children = [] } = element;
+  if (!tag) return ""; // skip if no tag
+
+  // Opening tag
+  let html = `${indent}<${tag}>`;
+
+  // Children
+  if (children.length) {
+    html += "\n" + serializeHTML(children, count + 1) + `\n${indent}`;
+  }
+
+  // Closing tag
+  html += `</${tag}>`;
+
+  return html;
+}
+
+async function retryWithExponential(fn, retry = 0, delay = 60) {
+  try {
+    const result = await fn();
+    return result;
+  } catch (err) {
+    if (retry === 0) throw err;
+    return retryWithExponential(fn, retry - 1, delay * 2);
+  }
+}
+
+/**
+ * Polyfill for Promise.all
+ * @param {*} promises
+ * @returns
+ */
+async function myPromiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    const results = [];
+    let completed = 0;
+    promises.forEach((promise, index) => {
+      promise
+        .then((data) => {
+          completed++;
+          results[index] = data;
+          if (completed === promise.length) {
+            resolve(result);
+          }
+        })
+        .catch((err) => reject(err));
+    });
+  });
+}
+
+function forwardRotate(nums, k) {
+  return nums.slice(-k).concat(nums.slice(0, nums.length - k));
+}
+
+function backwardRotate(nums, k) {
+  return nums.slice(k).concat(nums.slice(0, k));
+}
+
+const result = forwardRotate([1, 2, 3, 4, 5, 6, 7], 3);
+console.log(result); // [5, 6, 7, 1, 2, 3, 4]
+
+const result2 = backwardRotate([1, 2, 3, 4, 5, 6, 7], 3);
+console.log(result2); // [4, 5, 6, 7, 1, 2, 3]
+
+
+// // function stockProfit(prices) {
+// //   let profit = 0;
+// //   let buy = prices[0];
+// //   let sell = prices[0];
+// //   let minPrice = prices[0];
+// //   for (let j = 1; j < prices.length; j++) {
+// //     const price = prices[j] - minPrice;
+// //     if (price > profit) {
+// //       profit = price;
+// //       sell = prices[j];
+// //       buy = minPrice;
+// //     }
+
+// import { format } from "url";
+
+// //     if (prices[j] < minPrice) {
+// //       minPrice = prices[j];
+// //     }
+// //   }
+// //   return {
+// //     profit,
+// //     buy,
+// //     sell,
+// //   };
+// // }
+
+// // const result3 = stockProfit([5, 3, 8, 2, 7, 6]);
+// // console.log(result3); // { profit: 5, buy: 2, sell: 7 }
+
+// // function maxSubarray(nums) {
+// //   let max = nums[0];
+// //   let current = nums[0];
+// //   let startIndex = 0;
+// //   let endIndex = 0;
+// //   for (let i = 1; i < nums.length; i++) {
+// //     current = current + nums[i];
+// //     if (current > max) {
+// //       max = current;
+// //       endIndex = i;
+// //     }
+
+// //     if (current < 0) {
+// //       current = 0;
+// //       startIndex = i;
+// //       endIndex = i;
+// //     }
+// //   }
+// //   console.log(nums.slice(startIndex + 1, endIndex + 1));
+// //   return max;
+// // }
+
+// // const nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+// // const result = maxSubarray(nums);
+// // console.log("🚀 ~ result:", result);
+
+// const chunkArrayWithSize = (arr, size) => {
+//   const result = [];
+//   for (let i = 0; i < arr.length; i += size) {
+//     result.push(arr.slice(i, i + size));
+//   }
+// };
+
+// const divideArrayIntoParts = (arr, k) => {
+//   const result = [];
+//   const baseSize = Math.floor(arr.length / k);
+//   const extra = arr.length % k;
+//   let index = 0;
+//   for (let i = 0; i < k; i++) {
+//     let newSize = Math.min(index + baseSize, arr.length);
+//     if (i === 0) {
+//       newSize += extra;
+//     }
+//     result.push(arr.slice(index, newSize));
+//     if (i === 0) {
+//       index = index + baseSize + extra;
+//     } else {
+//       index += baseSize;
+//     }
+//   }
+
+//   return result;
+// };
+
+// const result = divideArrayIntoParts([1, 2, 3, 4, 5, 6], 3);
+// console.log(result);

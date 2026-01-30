@@ -25,7 +25,6 @@ export const Pagination = ({
   };
 
   const handleNext = () => {
-    console.log("asdf");
     setCurrentPage((prev) => prev + 1);
     onPageChange(currentPage - 1);
   };
