@@ -20,6 +20,7 @@ import StopWatch from "../component/StopWatch";
 import SwitchCase from "../component/SwitchCase";
 import Tabs from "../component/Tabs";
 import TicTacToe from "../component/TicTacToe";
+import Timer from "../component/Timer";
 import Todo from "../component/Todo";
 import TrafficLight from "../component/TrafficLight";
 import TransferList from "../component/TransferList";
@@ -201,5 +202,11 @@ export const routes = [
         </SwitchCase.DefaultCase>
       </SwitchCase>
     ),
+  },
+  {
+    key: "timer",
+    name: "Timer",
+    path: "/timer",
+    element: <Timer />,
   },
 ];

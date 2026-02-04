@@ -28,7 +28,6 @@ const SwitchCase = ({ value, children }) => {
     }
   });
 
-  console.log("🚀 ~ SwitchCase ~ componentList:", componentList);
   if (componentList.length === 0) {
     return React.cloneElement(DefaultComponent);
   } else {
